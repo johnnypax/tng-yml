@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: studenti-service
+  namespace: scuola-lab-ns
+
+spec:
+  selector:
+    app: studente-ws-pod
+  ports:
+    - port: 80  #Service port
+      targetPort: 80  #Container Port
+      nodePort: 30100 # orta esposta del nodo
+  type: NodePort
+
+      
+

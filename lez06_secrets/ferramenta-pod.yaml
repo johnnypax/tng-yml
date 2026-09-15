@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ferramenta-pod
+  namespace: ferramenta-ns
+spec:
+  containers:
+    - name: ferra
+      image: busybox
+      command: ["sh", "-c", "echo User=$DB_USER && echo Pass=$DB_PASSWORD && sleep 3600"]
+      env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: password

@@ -1,0 +1,31 @@
+#POD con ReadinessProbe
+apiVersion: v1
+kind: Pod
+metadata:
+  name: probe-pod-giovanni
+  namespace: probes-namespace
+spec:
+  containers:
+    - name: demo
+      image: busybox
+      command: ["sh", "-c", "sleep 10 && touch /tmp/ready && sleep 50 && exit 1"]
+      # Startup Probe - L'applicazone ha completato l'avvio?
+      startupProbe:
+        exec: 
+          command: ["sh", "-c", "test -f /tmp/ready"]
+          # command: ["sh", "-c", "curl http://localhost:8080/health"]
+        periodSeconds: 5
+        failureThreshold: 4
+      # Readiness Probe - Questa istanza deve ricevere del traffico adesso?
+      readinessProbe:
+        exec:
+          command: ["sh", "-c", "test -f  /tmp/ready"]  #Verifica che il file ready esista davvero.
+          # command: ["sh", "-c", "curl http://{POD_IP}:8080/health"]
+        periodSeconds: 2
+      # Liveness Probe
+      livenessProbe:
+        exec:
+          command: ["sh", "-c", "test -f  /tmp/ready"] 
+           # command: ["sh", "-c", "curl http://{POD_IP}:8080/health"]
+        initialDelaySeconds: 5
+        periodSeconds: 5

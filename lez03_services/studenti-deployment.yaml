@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: studenti-deployment
+  namespace: scuola-lab-ns
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: studente-ws-pod
+  template:
+    metadata:
+      labels:
+        app: studente-ws-pod
+    spec:
+      containers:
+        - name: studente-ws-container
+          image: nginx:latest
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP

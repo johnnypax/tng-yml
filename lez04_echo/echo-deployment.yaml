@@ -1,0 +1,32 @@
+apiVersion: apps/v1                               
+kind: Deployment
+
+metadata:
+  name: echo-deployment
+  namespace: echo-ns
+
+spec:
+  replicas: 50
+  selector:
+    matchLabels:
+      app: echo-pod
+  template:
+    metadata:
+      labels:
+        app: echo-pod
+    spec:
+      containers:
+        - name: echo-container
+          image: ealen/echo-server:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: POD_NAME
+              valueFrom: 
+                fieldRef: 
+                  fieldPath: metadata.name    # nome del POD
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP     # ip pod corrente
+            

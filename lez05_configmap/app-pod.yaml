@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+  namespace: universita-ns
+spec:
+  containers:
+    - name: demo-cli
+      image: busybox
+      command: ["sh", "-c", "echo $APP_MES_GIO && sleep 3600"]
+
+      env:
+        - name: APP_MES_GIO
+          valueFrom:
+            configMapKeyRef:
+              name: app-configmap
+              key: APP_MESSAGE
