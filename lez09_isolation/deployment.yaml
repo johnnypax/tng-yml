@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lez09-isolation-deployment
+  namespace: lez09-sms
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: lez09-sms-pod
+  template:                       # Specifica template del POD
+    metadata:
+      labels:
+        app: lez09-sms-pod  
+    spec:
+      containers:
+        - name: lez09-sms-pod
+          image: archety/student-api-in-memory:latest
+          
+          imagePullPolicy: Always
+
+          env:
+            - name: APP_NAME
+              value: "minikube-gio-test"
+            - name: APP_PROFILE
+              value: "production"
+            
