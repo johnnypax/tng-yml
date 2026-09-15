@@ -16,7 +16,22 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 10
+        averageUtilization: 2
+  
   behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      selectPolicy: Max
+      policies: 
+        - type: Percent     # Puoi aumentare le repliche fino al 100% di quelle che hai ogni 15 secondi
+          value: 100        # 1 -> 2 -> 4 -> 8
+          periodSeconds: 15
+
     scaleDown:
-      stabilizationWindowSeconds: 5
+      stabilizationWindowSeconds: 60
+      selectPolicy: Max
+      policies:
+        - type: Percent
+          value: 50
+          periodSeconds: 15
+        
