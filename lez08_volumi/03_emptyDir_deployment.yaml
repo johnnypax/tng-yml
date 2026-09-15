@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shared-volume-deployment
+  namespace: shared-v-ns
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: shared-volume-pod 
+  template:                       # Specifica template del POD
+    metadata:
+      labels:
+        app: shared-volume-pod   
+    spec:
+      containers:
+        - name: writer
+          image: busybox:1.36
+          command: ["sh", "-c"]
+          args:
+            - |
+              echo "Writer started";
+              while true; do
+                date >> /data/log.txt;
+                sleep 2;
+              done
+          volumeMounts:
+            - name: shared-data
+              mountPath: /data
+
+        - name: reader
+          image: alpine:3.20
+          command: ["sh", "-c"]
+          args:
+            - |
+              echo "Reader started";
+              while true; do
+                echo "---";
+                tail -n 3 /data/log.txt 2>/dev/null;
+                sleep 3;
+              done
+          volumeMounts:
+            - name: shared-data
+              mountPath: /data
+              readOnly: true
+
+      volumes:
+        - name: shared-data
+          emptyDir: {}
+    
