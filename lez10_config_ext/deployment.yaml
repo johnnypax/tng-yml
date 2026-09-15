@@ -21,9 +21,15 @@ spec:
 
           env:
             - name: APP_NAME
-              value: "minikube-gio-test"
+              valueFrom:
+                configMapKeyRef:
+                  name: lez09-isolation-configmap
+                  key: APP_NM
             - name: APP_PROFILE
-              value: "production"
+              valueFrom:
+                configMapKeyRef:
+                  name: lez09-isolation-configmap
+                  key: APP_PR
 
           readinessProbe:
             httpGet:
