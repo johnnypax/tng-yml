@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: lez09-isolation-service
+  namespace: lez09-sms
+spec:
+  selector:
+    app: lez09-sms-pod
+  ports:
+  - protocol: TCP
+    port: 80          # Porta del service
+    targetPort: 8080  # Porta del Pod che espone il container
+  # NodePort: Apre la porta 80 su tutti i Worker node!
+  # ClusterIP: Il servizio diventa accessibile solo all'interno del cluster
+  type: NodePort
+

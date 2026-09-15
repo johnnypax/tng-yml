@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lez09-isolation-configmap
+  namespace: lez09-sms
+data:
+  APP_NM: "minikube-gio-test"
+  APP_PR: "production"
