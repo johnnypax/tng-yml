@@ -12,5 +12,5 @@ spec:
     targetPort: 8080  # Porta del Pod che espone il container
   # NodePort: Apre la porta 80 su tutti i Worker node!
   # ClusterIP: Il servizio diventa accessibile solo all'interno del cluster
-  type: ClusterIP
+  type: NodePort
 
