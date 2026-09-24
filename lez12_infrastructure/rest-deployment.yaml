@@ -4,7 +4,7 @@ metadata:
   name: rest-deployment
   namespace: school-ns
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: sms-rest
@@ -46,20 +46,20 @@ spec:
           httpGet:
             path: /actuator/health
             port: 8080
-          initialDelaySeconds: 20
+          initialDelaySeconds: 40
           periodSeconds: 5
         livenessProbe:
           httpGet:
             path: /actuator/health
             port: 8080
-          initialDelaySeconds: 30
+          initialDelaySeconds: 40
           periodSeconds: 10
 
 
         resources:
           requests:
-            cpu: "250m"
+            cpu: "500m"
             memory: "512Mi"
           limits:
             memory: "1Gi"
-            cpu: "500m"
+            cpu: "1000m"
