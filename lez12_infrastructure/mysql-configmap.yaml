@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+  namespace: school-ns
+data:
+  MYSQL_DATABASE: "student_db"
+  MYSQL_HOST: mysql-service     ## Risolvi automaticamente l'IP del service
+  MYSQL_PORT: "3306"
