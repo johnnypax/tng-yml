@@ -4,6 +4,7 @@ metadata:
   name: rest-deployment
   namespace: school-ns
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: sms-rest
