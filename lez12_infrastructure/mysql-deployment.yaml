@@ -18,3 +18,29 @@ spec:
           image: mysql:8.4
       ports:
         - containerPort: 3306
+
+        envFrom:
+          - configMapRef:
+              name: mysql-configmap
+          - secretRef:
+              name: mysql-secrets
+
+        readinessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          
+        livenessProbe:
+          tcpSocket:
+            port: 3306
+          initialDelaySeconds: 30
+          periodSeconds: 10
+
+         resources:
+          requests:
+            cpu: "250m"
+            memory: "512Mi"
+          limits:
+            cpu: "500m"
+            memory: "1Gi"

@@ -7,3 +7,4 @@ data:
   MYSQL_DATABASE: "student_db"
   MYSQL_HOST: mysql-service     ## Risolvi automaticamente l'IP del service
   MYSQL_PORT: "3306"
+  PIPPO: "Giovanni"
