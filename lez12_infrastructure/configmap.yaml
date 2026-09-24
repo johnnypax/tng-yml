@@ -8,3 +8,5 @@ data:
   MYSQL_HOST: mysql-service     ## Risolvi automaticamente l'IP del service
   MYSQL_PORT: "3306"
   PIPPO: "Giovanni"
+  APP_PROFILE: production
+  SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/student_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
