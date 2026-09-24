@@ -1,0 +1,15 @@
+replicaCount: 10
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: "latest"
+  port: 80
+
+env:
+  SPRING_PROFILES_ACTIVE: dev
+  APP_NAME: student-api-giovanni
+
+service:
+  type: NodePort
+  port: 80

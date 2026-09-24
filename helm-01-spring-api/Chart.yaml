@@ -1,0 +1,4 @@
+apiVersion: v2
+name: spring-boot-api
+description: A Helm chart for Kubernetes Spring Boot API application
+version: 1.0.0
